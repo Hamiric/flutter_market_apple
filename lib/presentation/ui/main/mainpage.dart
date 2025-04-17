@@ -15,7 +15,7 @@ class MainPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           child: ListView.builder(
             itemCount: 4,
             itemBuilder: (BuildContext context, int index){
