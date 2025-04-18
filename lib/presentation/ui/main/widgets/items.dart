@@ -1,12 +1,16 @@
+import 'package:apple_market/data/dto/dto_product.dart';
+import 'package:apple_market/presentation/app/stringprice.dart';
 import 'package:flutter/material.dart';
 
 class Items extends StatelessWidget {
-  const Items({super.key});
+  const Items({super.key, required this.products});
+
+  final Product products;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.only(bottom: 24),
       child: Container(
         height: 140,
         decoration: BoxDecoration(
@@ -16,7 +20,7 @@ class Items extends StatelessWidget {
             BoxShadow(
               color: Colors.grey.withValues(alpha: 0.5),
               spreadRadius: 2,
-              blurRadius: 5,
+              blurRadius: 3,
               offset: Offset(0, 3),
             ),
           ],
@@ -29,7 +33,7 @@ class Items extends StatelessWidget {
               height: 140,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
-                child: Image.asset('assets/img/sample1.png', fit: BoxFit.cover),
+                child: Image.asset('assets/img/${products.imageName}.png', fit: BoxFit.cover),
               ),
             ),
             // 데이터
@@ -44,7 +48,7 @@ class Items extends StatelessWidget {
                   children: [
                     // 상품명
                     Text(
-                      '김치냉장고',
+                      products.title,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -54,16 +58,16 @@ class Items extends StatelessWidget {
                     ),
                     // 주소
                     Text(
-                      '인천 계양구 귤현동',
+                      products.address,
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: Colors.grey,
                       ),
                     ),
                     // 가격
                     Text(
-                      '20,000 원',
+                      formatPrice(products.price),
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -78,11 +82,11 @@ class Items extends StatelessWidget {
                         children: [
                           Icon(Icons.forum_outlined, size: 20),
                           SizedBox(width: 4),
-                          Text('28'),
+                          Text(products.chats.toString()),
                           SizedBox(width: 12),
                           Icon(Icons.favorite_border, size: 20),
                           SizedBox(width: 4),
-                          Text('8'),
+                          Text(products.likes.toString()),
                         ],
                       ),
                     ),
