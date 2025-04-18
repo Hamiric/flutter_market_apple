@@ -10,7 +10,7 @@ showSnackBar(BuildContext context) {
       borderRadius: BorderRadius.all(Radius.circular(10)),
     ),
     backgroundColor: const Color(0xff9E9E9E),
-    behavior: SnackBarBehavior.floating,
+    behavior: SnackBarBehavior.fixed,
     duration: const Duration(seconds: 2),
     action: SnackBarAction(
       label: '',
