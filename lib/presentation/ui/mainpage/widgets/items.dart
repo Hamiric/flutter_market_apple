@@ -1,12 +1,15 @@
 import 'package:apple_market/data/dto/dto_product.dart';
 import 'package:apple_market/presentation/app/stringprice.dart';
 import 'package:apple_market/presentation/ui/detailpage/detailpage.dart';
+import 'package:apple_market/presentation/ui/mainpage/viewmodel/mainpage_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class Items extends StatelessWidget {
-  const Items({super.key, required this.product});
+  const Items({super.key, required this.product, required this.index});
 
   final Product product;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,46 @@ class Items extends StatelessWidget {
           // 상세 페이지 이동
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => DetailPage(product: product,)),
+            MaterialPageRoute(
+              builder: (context) => DetailPage(product: product),
+            ),
+          );
+        },
+        onLongPress: () {
+          showDialog(
+            context: context,
+            barrierDismissible: false,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('상품 삭제'),
+                content: Text('이 상품을 삭제하시겠습니까?'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('취소'),
+                  ),
+                  Consumer(
+                    builder: (
+                      BuildContext context,
+                      WidgetRef ref,
+                      Widget? child,
+                    ) {
+                      return TextButton(
+                        onPressed: () {
+                          ref
+                              .read(mainPageViewModelProvider.notifier)
+                              .deleteProduct(index);
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('확인'),
+                      );
+                    },
+                  ),
+                ],
+              );
+            },
           );
         },
         child: Container(

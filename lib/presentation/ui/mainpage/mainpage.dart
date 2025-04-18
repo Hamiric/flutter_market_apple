@@ -1,7 +1,7 @@
 import 'package:apple_market/presentation/ui/mainpage/viewmodel/mainpage_viewmodel.dart';
 import 'package:apple_market/presentation/ui/mainpage/widgets/items.dart';
 import 'package:apple_market/presentation/ui/mainpage/widgets/scrollup_floatingactionbutton.dart';
-import 'package:apple_market/presentation/ui/mainpage/widgets/snackBar.dart';
+import 'package:apple_market/presentation/ui/mainpage/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -62,7 +62,7 @@ class _MainPageState extends ConsumerState<MainPage> {
                 controller: _scrollController,
                 itemCount: products.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Items(product: products[index]);
+                  return Items(product: products[index], index: index,);
                 },
               ),
             ),

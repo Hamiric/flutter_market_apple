@@ -36,6 +36,16 @@ class MainPageViewmodel extends AsyncNotifier<MainState> {
       return MainState([Product()]);
     }
   }
+
+  // 상품 삭제
+  void deleteProduct(int index) {
+    final currentState = state.value;
+    if (currentState == null) return;
+
+    final newProduct = List<Product>.from(currentState.product)
+      ..removeAt(index);
+    state = AsyncValue.data(MainState(newProduct));
+  }
 }
 
 final mainPageViewModelProvider =
