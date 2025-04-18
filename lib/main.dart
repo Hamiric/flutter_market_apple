@@ -1,5 +1,5 @@
 import 'package:apple_market/presentation/theme/theme.dart';
-import 'package:apple_market/presentation/ui/main/mainpage.dart';
+import 'package:apple_market/presentation/ui/mainpage/mainpage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

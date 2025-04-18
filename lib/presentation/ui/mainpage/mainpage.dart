@@ -1,5 +1,6 @@
-import 'package:apple_market/presentation/ui/main/viewmodel/mainpage_viewmodel.dart';
-import 'package:apple_market/presentation/ui/main/widgets/items.dart';
+import 'package:apple_market/presentation/ui/mainpage/viewmodel/mainpage_viewmodel.dart';
+import 'package:apple_market/presentation/ui/mainpage/widgets/items.dart';
+import 'package:apple_market/presentation/ui/mainpage/widgets/snackBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -15,7 +16,9 @@ class MainPage extends ConsumerWidget {
         title: Text('르탄동'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showSnackBar(context);
+            },
             icon: Icon(Icons.notifications_none, size: 28),
           ),
         ],
@@ -30,14 +33,14 @@ class MainPage extends ConsumerWidget {
               child: ListView.builder(
                 itemCount: products.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Items(products: products[index]);
+                  return Items(product: products[index]);
                 },
               ),
             ),
           );
         },
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, _) => Center(child: Text('에러 발생: $error')),
+        error: (error, _) => Center(child: Text('에러: $error')),
       ),
     );
   }

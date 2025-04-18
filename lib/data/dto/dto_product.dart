@@ -26,7 +26,7 @@ class Product {
       id: int.parse(row[0]),
       imageName: row[1],
       title: row[2],
-      description: row[3],
+      description: row[3].replaceAll(r'\n', '\n'),
       seller: row[4],
       price: int.parse(row[5]),
       address: row[6],
