@@ -1,13 +1,23 @@
 import 'package:apple_market/presentation/app/stringprice.dart';
+import 'package:apple_market/presentation/ui/mainpage/viewmodel/mainpage_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DetailBottombar extends StatelessWidget {
-  const DetailBottombar({super.key, required this.price});
+class DetailBottombar extends ConsumerStatefulWidget {
+  const DetailBottombar({super.key, required this.price, required this.index});
 
   final int price;
+  final int index;
 
   @override
+  ConsumerState<DetailBottombar> createState() => _DetailBottombarState();
+}
+
+class _DetailBottombarState extends ConsumerState<DetailBottombar> {
+  @override
   Widget build(BuildContext context) {
+    bool isfavorite = ref.read(mainPageViewModelProvider.notifier).setOnLikesBtn(widget.index);
+    
     return Container(
       height: 100,
       decoration: BoxDecoration(color: Colors.white),
@@ -19,11 +29,30 @@ class DetailBottombar extends StatelessWidget {
           children: [
             // 좋아요 아이콘
             IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.favorite_border, color: Colors.grey),
+              onPressed: () {
+                setState(() {
+                  if (isfavorite == false) {
+                    ref
+                        .read(mainPageViewModelProvider.notifier)
+                        .favoritCountChange(widget.index, true);
+                  } else {
+                    ref
+                        .read(mainPageViewModelProvider.notifier)
+                        .favoritCountChange(widget.index, false);
+                  }
+                  isfavorite = !isfavorite;
+                });
+              },
+              icon: Icon(
+                isfavorite ? Icons.favorite : Icons.favorite_border,
+                color: isfavorite ? Colors.red : Colors.grey,
+              ),
             ),
             // 가격
-            Text(formatPrice(price), style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            Text(
+              formatPrice(widget.price),
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
             // 채팅하기 버튼
             ElevatedButton(
               onPressed: () {},

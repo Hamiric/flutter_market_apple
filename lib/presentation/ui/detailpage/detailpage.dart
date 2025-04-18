@@ -4,9 +4,10 @@ import 'package:apple_market/presentation/ui/detailpage/widgets/content.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
-  const DetailPage({super.key, required this.product});
+  const DetailPage({super.key, required this.product, required this.index});
 
   final Product product;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class DetailPage extends StatelessWidget {
               child: Content(product: product,),
             ),
             // 하단바
-            DetailBottombar(price: product.price),
+            DetailBottombar(price: product.price, index: index),
           ],
         ),
       ),

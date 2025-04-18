@@ -37,6 +37,14 @@ class MainPageViewmodel extends AsyncNotifier<MainState> {
     }
   }
 
+  // 상품의 favorite 상태 가져오기
+  bool setOnLikesBtn(int index){
+    final currentState = state.value;
+    if (currentState == null) return false;
+
+    return currentState.product[index].onlikesbtn;
+  }
+
   // 상품 삭제
   void deleteProduct(int index) {
     final currentState = state.value;
@@ -44,6 +52,24 @@ class MainPageViewmodel extends AsyncNotifier<MainState> {
 
     final newProduct = List<Product>.from(currentState.product)
       ..removeAt(index);
+    state = AsyncValue.data(MainState(newProduct));
+  }
+
+  // 좋아요 카운트 변경
+  void favoritCountChange(int index, bool isUp) {
+    final currentState = state.value;
+    if (currentState == null) return;
+
+    List<Product> newProduct = List<Product>.from(currentState.product);
+
+    if(isUp){
+      newProduct[index].likes += 1;
+      newProduct[index].onlikesbtn = true;
+    } else{
+      newProduct[index].likes -= 1;
+      newProduct[index].onlikesbtn = false;
+    }
+
     state = AsyncValue.data(MainState(newProduct));
   }
 }

@@ -1,13 +1,14 @@
 class Product {
-  final int id;
-  final String imageName;
-  final String title;
-  final String description;
-  final String seller;
-  final int price;
-  final String address;
-  final int likes;
-  final int chats;
+  int id;
+  String imageName;
+  String title;
+  String description;
+  String seller;
+  int price;
+  String address;
+  int likes;
+  int chats;
+  bool onlikesbtn;
 
   Product({
     this.id = 0,
@@ -19,6 +20,7 @@ class Product {
     this.address = '',
     this.likes = 0,
     this.chats = 0,
+    this.onlikesbtn = false,
   });
 
   factory Product.fromCsv(List<String> row) {
@@ -32,6 +34,7 @@ class Product {
       address: row[6],
       likes: int.parse(row[7]),
       chats: int.parse(row[8]),
+      onlikesbtn: false,
     );
   }
 }
